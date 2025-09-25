@@ -7,7 +7,7 @@ internal class Program
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-        var colors = new[] { ConsoleColor.Black, ConsoleColor.Green, ConsoleColor.Yellow };
+        var colors = new[] { ConsoleColor.Black, ConsoleColor.Green, ConsoleColor.Blue, ConsoleColor.Yellow, ConsoleColor.Red };
         var renderer = new ConsoleRenderer(colors);
         var input = new ConsoleInput();
 

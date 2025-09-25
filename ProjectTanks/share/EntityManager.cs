@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Share
 {
-    internal class EntityManager
+    internal class EntityManager // Класс сущностей
     {
-        private readonly List<IEntity> _entities = new List<IEntity>();
+        private readonly List<IEntity> _entities = new List<IEntity>(); // Хранение всех сущностей
 
-        public void AddEntity(IEntity entity)
+        public void AddEntity(IEntity entity) // Добавление сущности
         {
             _entities.Add(entity);
         }

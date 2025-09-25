@@ -1,6 +1,6 @@
 ﻿namespace Shared
 {
-    internal interface IEntity
+    internal interface IEntity // Интерфейс сущности
     {
         int X { get; }
         int Y { get; }
