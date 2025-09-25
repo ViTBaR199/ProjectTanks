@@ -1,11 +1,8 @@
 ﻿using Field;
+using share;
 using Share;
 using Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Tank
 {
@@ -23,6 +20,17 @@ namespace Tank
             var levelManager = new LevelManager();
             _field = levelManager.GenerateLevel(21, 15);
 
+            for (int y = 0; y < _field.Height; y++)
+            {
+                for (int x = 0; x < _field.Width; x++)
+                {
+                    if (_field.GetCell(x, y) == CellType.Wall)
+                    {
+                        _entityManager.AddEntity(new WallEntity(x, y));
+                    }
+                }
+            }
+
             _playerTank = new Tank(2, 2);
             _input.Subscribe(_playerTank);
 
@@ -31,7 +39,7 @@ namespace Tank
 
         public override void Update(float deltaTIme)
         {
-            _input.Update();
+            _input.Update(_field);
             _playerTank.Update(deltaTIme);
         }
 

@@ -1,4 +1,5 @@
-﻿using Shared;
+﻿using Field;
+using Shared;
 
 namespace Tank
 {
@@ -65,25 +66,33 @@ namespace Tank
         }
 
         //Обработка движения
-        public void OnArrowUp()
+        public void OnArrowUp(GameField field)
         {
             _direction = Direction.Up;
-            Y = Math.Max(1, Y - _speed);
+
+            if (field.GetCell(X / 2, Y / 2 - 1) == CellType.Empty)
+                    Y = Math.Max(1, Y - _speed);
         }
-        public void OnArrowDown()
+        public void OnArrowDown(GameField field)
         {
             _direction = Direction.Down;
-            Y = Math.Min(Console.WindowHeight - 3, Y + _speed);
+
+            if (field.GetCell(X / 2, Y / 2 + 1) == CellType.Empty)
+                    Y = Math.Min(Console.WindowHeight - 3, Y + _speed);
         }
-        public void OnArrowLeft()
+        public void OnArrowLeft(GameField field)
         {
             _direction = Direction.Left;
-            X = Math.Max(1, X - _speed);
+
+            if (field.GetCell(X / 2 - 1, Y / 2) == CellType.Empty)
+                    X = Math.Max(1, X - _speed);
         }
-        public void OnArrowRight()
+        public void OnArrowRight(GameField field)
         {
             _direction = Direction.Right;
-            X = Math.Min(Console.WindowWidth - 3, X + _speed);
+
+            if (field.GetCell(X / 2 + 1, Y / 2) == CellType.Empty)
+                    X = Math.Min(Console.WindowWidth - 3, X + _speed);
         }
     }
 }
