@@ -9,7 +9,8 @@ namespace Tank
     internal class GameState : BaseGameState
     {
         private readonly EntityManager _entityManager = new EntityManager();
-        private readonly Tank _playerTank; // Танк игрока
+        private readonly PlayerTank _playerTank; // Танк игрока
+        private readonly EnemyTank _enemyTank; // Вражеский танк
         private readonly ConsoleInput _input; // Управление
         private readonly GameField _field;
 
@@ -31,16 +32,23 @@ namespace Tank
                 }
             }
 
-            _playerTank = new Tank(2, 2);
+            _playerTank = new PlayerTank(2, 2, _entityManager);
+            _enemyTank = new EnemyTank(_field.Width - 1, _field.Height - 1, _entityManager);
+
             _input.Subscribe(_playerTank);
 
             _entityManager.AddEntity(_playerTank);
+            _entityManager.AddEntity(_enemyTank);
         }
+
+        
 
         public override void Update(float deltaTIme)
         {
             _input.Update(_field);
             _playerTank.Update(deltaTIme);
+            _enemyTank.Update(deltaTIme);
+            _enemyTank.MoveRandomly(_field);
         }
 
         public override void Draw(ConsoleRenderer renderer)
